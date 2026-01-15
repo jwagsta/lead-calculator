@@ -202,37 +202,43 @@ export function Calculator() {
           </div>
 
           {/* Lead content selector for variable products */}
-          {hasVariableLead && selectedProduct.leadContentRange && (
-            <div>
-              <label className="block text-sm text-leep-muted mb-2">
-                Lead Content
-                <span className="text-leep-yellow ml-2">
-                  (varies widely: {selectedProduct.leadContentRange.min} - {selectedProduct.leadContentRange.max} ppm)
-                </span>
-              </label>
-              <select
-                value={exposure.customLeadPpm ?? selectedProduct.leadContentPpm}
-                onChange={(e) => setExposure({ ...exposure, customLeadPpm: Number(e.target.value) })}
-                className="w-full p-3 border border-leep-gray bg-leep-darker text-leep-light rounded focus:border-leep-yellow focus:outline-none"
-              >
-                <option value={selectedProduct.leadContentRange.min}>
-                  Low ({selectedProduct.leadContentRange.min} ppm) - Modern/regulated product
-                </option>
-                <option value={selectedProduct.leadContentPpm}>
-                  Typical ({selectedProduct.leadContentPpm} ppm) - Average
-                </option>
-                <option value={selectedProduct.leadContentRange.max * 0.1}>
-                  High ({(selectedProduct.leadContentRange.max * 0.1).toFixed(0)} ppm) - Traditional/unregulated
-                </option>
-                <option value={selectedProduct.leadContentRange.max}>
-                  Very High ({selectedProduct.leadContentRange.max} ppm) - Worst case
-                </option>
-              </select>
-              <p className="text-xs text-leep-gray mt-1">
-                Lead content varies significantly by source and product
-              </p>
-            </div>
-          )}
+          {hasVariableLead && selectedProduct.leadContentRange && (() => {
+            // Calculate "High" as geometric mean between typical and max
+            const highValue = Math.sqrt(selectedProduct.leadContentPpm * selectedProduct.leadContentRange.max)
+            const formatPpm = (val: number) => val >= 1000 ? val.toLocaleString() : val >= 1 ? val.toFixed(0) : val.toFixed(2)
+
+            return (
+              <div>
+                <label className="block text-sm text-leep-muted mb-2">
+                  Lead Content
+                  <span className="text-leep-yellow ml-2">
+                    (varies widely: {formatPpm(selectedProduct.leadContentRange.min)} - {formatPpm(selectedProduct.leadContentRange.max)} ppm)
+                  </span>
+                </label>
+                <select
+                  value={exposure.customLeadPpm ?? selectedProduct.leadContentPpm}
+                  onChange={(e) => setExposure({ ...exposure, customLeadPpm: Number(e.target.value) })}
+                  className="w-full p-3 border border-leep-gray bg-leep-darker text-leep-light rounded focus:border-leep-yellow focus:outline-none"
+                >
+                  <option value={selectedProduct.leadContentRange.min}>
+                    Low ({formatPpm(selectedProduct.leadContentRange.min)} ppm) - Modern/regulated
+                  </option>
+                  <option value={selectedProduct.leadContentPpm}>
+                    Typical ({formatPpm(selectedProduct.leadContentPpm)} ppm) - Average
+                  </option>
+                  <option value={highValue}>
+                    High ({formatPpm(highValue)} ppm) - Traditional/unregulated
+                  </option>
+                  <option value={selectedProduct.leadContentRange.max}>
+                    Very High ({formatPpm(selectedProduct.leadContentRange.max)} ppm) - Worst case
+                  </option>
+                </select>
+                <p className="text-xs text-leep-gray mt-1">
+                  Lead content varies significantly by source and product
+                </p>
+              </div>
+            )
+          })()}
 
           {/* Amount per use */}
           <div>
