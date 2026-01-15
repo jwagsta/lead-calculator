@@ -76,32 +76,25 @@ export function Calculator() {
     <div className="bg-leep-dark border border-leep-gray p-6 font-mono">
       {/* Progress indicator */}
       <div className="mb-8">
-        <div className="flex items-center">
+        <div className="flex justify-between">
           {STEPS.map((s, i) => (
-            <div key={s} className="flex items-center flex-1 last:flex-none">
-              <div className="flex flex-col items-center">
-                <div
-                  className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold border-2 transition-colors ${
-                    i === currentStepIndex
-                      ? 'bg-leep-yellow text-leep-darker border-leep-yellow'
-                      : i < currentStepIndex
-                      ? 'bg-leep-gray text-leep-light border-leep-gray'
-                      : 'bg-transparent text-leep-gray border-leep-gray'
-                  }`}
-                >
-                  {i + 1}
-                </div>
-                <span className={`text-xs mt-2 ${
-                  i === currentStepIndex ? 'text-leep-yellow' : 'text-leep-gray'
-                }`}>
-                  {STEP_LABELS[s]}
-                </span>
+            <div key={s} className="flex flex-col items-center">
+              <div
+                className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold border-2 transition-colors ${
+                  i === currentStepIndex
+                    ? 'bg-leep-yellow text-leep-darker border-leep-yellow'
+                    : i < currentStepIndex
+                    ? 'bg-leep-gray text-leep-light border-leep-gray'
+                    : 'bg-transparent text-leep-gray border-leep-gray'
+                }`}
+              >
+                {i + 1}
               </div>
-              {i < STEPS.length - 1 && (
-                <div className={`h-0.5 flex-1 mx-3 ${
-                  i < currentStepIndex ? 'bg-leep-gray' : 'bg-leep-gray/30'
-                }`} />
-              )}
+              <span className={`text-xs mt-2 ${
+                i === currentStepIndex ? 'text-leep-yellow' : 'text-leep-gray'
+              }`}>
+                {STEP_LABELS[s]}
+              </span>
             </div>
           ))}
         </div>
