@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap');
+
+:root {
+  --leep-yellow: #ffba5a;
+  --leep-gray: #55677f;
+  --leep-dark: #2d3748;
+  --leep-darker: #1a202c;
+}
+
+body {
+  font-family: 'IBM Plex Mono', monospace;
+  background-color: var(--leep-darker);
+  color: #e2e8f0;
+}
+
+/* Form inputs in dark mode */
+input, select {
+  background-color: var(--leep-dark);
+  color: #e2e8f0;
+}
+
+input::placeholder {
+  color: #718096;
+}
+
+/* Details/summary styling */
+details summary::-webkit-details-marker {
+  display: none;
+}
+
+details[open] summary {
+  margin-bottom: 0.5rem;
+}
