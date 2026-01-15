@@ -164,7 +164,7 @@ export function Calculator() {
 
           <button
             type="submit"
-            className="w-full bg-leep-yellow hover:bg-yellow-400 text-leep-darker font-bold py-3 px-4 rounded transition-colors"
+            className="w-full bg-leep-yellow hover:brightness-110 text-leep-darker font-bold py-3 px-4 rounded transition-colors"
           >
             Continue
           </button>
@@ -356,7 +356,7 @@ export function Calculator() {
             </button>
             <button
               type="submit"
-              className="flex-1 bg-leep-yellow hover:bg-yellow-400 text-leep-darker font-bold py-3 px-4 rounded transition-colors"
+              className="flex-1 bg-leep-yellow hover:brightness-110 text-leep-darker font-bold py-3 px-4 rounded transition-colors"
             >
               Calculate
             </button>
