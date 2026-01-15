@@ -76,10 +76,10 @@ export function Calculator() {
     <div className="bg-leep-dark border border-leep-gray p-6 font-mono">
       {/* Progress indicator */}
       <div className="mb-8">
-        <div className="flex justify-between items-center">
+        <div className="flex items-center">
           {STEPS.map((s, i) => (
-            <div key={s} className="flex items-center flex-1">
-              <div className="flex flex-col items-center flex-1">
+            <div key={s} className="flex items-center flex-1 last:flex-none">
+              <div className="flex flex-col items-center">
                 <div
                   className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold border-2 transition-colors ${
                     i === currentStepIndex
@@ -98,7 +98,7 @@ export function Calculator() {
                 </span>
               </div>
               {i < STEPS.length - 1 && (
-                <div className={`h-0.5 w-full mx-2 ${
+                <div className={`h-0.5 flex-1 mx-3 ${
                   i < currentStepIndex ? 'bg-leep-gray' : 'bg-leep-gray/30'
                 }`} />
               )}
